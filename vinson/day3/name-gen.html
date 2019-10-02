@@ -8,6 +8,15 @@
             font-size: 40px;
             padding: 10px;
         }
+
+        li {
+            position: relative;
+            left: 0;
+            transition: all 1s ease-in-out;
+        }
+        .offscreen {
+            left: -200px;
+        }
     </style>
 </head>
 <body>
@@ -40,7 +49,6 @@
     addButton.addEventListener('click', addName );
 
     for (let i = 0; i < names.length; i++) {
-        console.log(names[i]);
         createNameLi(names[i]);
     }
 
@@ -56,16 +64,29 @@
             input.placeholder = 'please enter a name';
             return;
         }
-        console.log('value', value);
         names.push(value);
         createNameLi(value);
     }
 
     function createNameLi(name) {
         const li = document.createElement('li');
-        console.log('li', li);
         li.innerText = name;
         ul.appendChild(li);
+        li.classList.add('offscreen');
+        li.addEventListener('click', deleteMe);
+        setTimeout(function () {
+            li.classList.remove('offscreen');
+        }, Math.floor(Math.random() * 1000));
+    }
+
+    function deleteMe() {
+        this.classList.add('offscreen');
+        const value = this.innerText;
+        console.log(value, names.indexOf(value));
+        names.splice(names.indexOf(value), 1);
+        setTimeout( () => {
+            this.remove();
+        }, 1000);
     }
 </script>
 </body>
