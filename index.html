@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background: antiquewhite;
+        }
+
+        .todo, .done {
+            display: block;
+            width: 400px;
+            border: 1px black solid;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+
+<script>
+    function createH1(content) {
+        document.write('<h1>' + content + '</h1>')
+    }
+    function createH2(content) {
+        document.write('<h2>' + content + '</h2>')
+    }
+    function createEl(content, tag) {
+        const el = document.createElement(tag);
+        el.innerHTML = content;
+        document.body.appendChild(el);
+        return el;
+    }
+    // create title
+    createH1('another Title');
+
+    // create input elements
+    const input = createEl('', 'input');
+    const myButton = createEl('hi', 'button');
+
+    // add listeners and text
+    myButton.innerHTML = 'Click me';
+    const colors = ['red', 'white', 'blue', 'green'];
+    function onSubmit() {
+        const todo = document.querySelector('.todo');
+        const value = input.value;
+        input.value = '';
+        if (colors.includes(value)) {
+            myButton.style.textAlign = value;
+        } else {
+            const item = createEl(value, 'button');
+            item.addEventListener('mouseenter', function () {
+                doneList.appendChild(item);
+            });
+            todo.appendChild(item);
+        }
+    }
+    input.addEventListener('keydown', function (event) {
+        console.log('event', event);
+        if(event.key === 'Enter') {
+            onSubmit();
+        }
+    });
+    myButton.addEventListener('click', function () {onSubmit();} );
+
+    createEl('', 'br');
+    const todoList = createEl('', 'div');
+    const doneList = createEl('', 'div');
+
+
+    todoList.classList.add('todo');
+    doneList.classList.add('done');
+
+
+</script>
+
+</body>
+</html>

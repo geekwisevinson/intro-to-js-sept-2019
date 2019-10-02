@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+    class Game {
+        teams = [];
+        constructor(team1, team2) {
+            this.teams.push(new Team(team1));
+            this.teams.push(new Team(team2));
+        }
+    }
+
+    class Team {
+        players = [];
+        name;
+        constructor( name ) {
+            this.name = name;
+            for (let i = 0; i < 10; i++) {
+                this.players.push(new Player())
+            }
+        }
+    }
+
+    class Player {
+        small = 0;
+        large = 0;
+        gameChanger = 0;
+        special = 0;
+        constructor() {
+            this.small = Math.floor(Math.random() * 10);
+            this.large = Math.floor(Math.random() * 10);
+            this.gameChanger = Math.floor(Math.random() * 10);
+            this.special = Math.floor(Math.random() * 10);
+        }
+    }
+
+
+    const actions = {
+        small: {
+            win: '1 - 10 yards',
+            lose: 'loss 0 - 5'
+        },
+        large: {
+            win: '10 - 25 yards',
+            lose: 'loss 5 - 10yards'
+        },
+        gameChanger: {
+            win: 'touchdown',
+            lose: 'interception/fumble'
+        },
+        special: {
+            win: 'field goal',
+            lose: 'turn over on downs'
+        }
+    };
+
+    function runAction() {
+
+        let percentage = 0;
+        const special = percentage += 1;
+        const gameChanger = percentage += 3;
+        const large = percentage += 5;
+        const small = percentage += 7;
+        const random = Math.floor( Math.random() * percentage );
+        console.log(special, gameChanger, large, small, random);
+
+        if ( random < special) {
+            return 'special';
+        } else if (random < gameChanger) {
+            return 'gameChanger';
+        } else if ( random < large) {
+            return 'large';
+        } else if ( random < small) {
+            return 'small';
+        } else {
+            return 'no match'
+        }
+
+    }
+
+    document.write('<pre>' + JSON.stringify(new Game('sf', 'dc') ) + '</pre>');
+</script>
+
+
+</body>
+</html>
