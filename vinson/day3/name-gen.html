@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        button {
+        button, input {
             font-size: 40px;
             padding: 10px;
         }
@@ -14,6 +14,7 @@
 <h1>Name Generator</h1>
     <button onclick="randomName()">Random</button>
 
+<input type="text"><button>Add</button>
 <ul>
 </ul>
 
@@ -33,7 +34,10 @@
     // capture elements from the html
     const ul = document.querySelector('ul');
     const button = document.querySelector('button');
+    const input = document.querySelector('input');
+    const addButton = document.querySelectorAll('button')[1];
 
+    addButton.addEventListener('click', addName );
 
     for (let i = 0; i < names.length; i++) {
         console.log(names[i]);
@@ -46,6 +50,12 @@
     function randomName() {
         const randomNumber = Math.floor(Math.random() * names.length);
         button.innerText = names[randomNumber];
+    }
+    
+    function addName() {
+        const value = input.value;
+        console.log('value', value);
+        names.push(value);
     }
 </script>
 </body>
