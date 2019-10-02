@@ -41,10 +41,7 @@
 
     for (let i = 0; i < names.length; i++) {
         console.log(names[i]);
-        const li = document.createElement('li');
-        console.log('li', li);
-        li.innerText = names[i];
-        ul.appendChild(li);
+        createNameLi(names[i]);
     }
 
     function randomName() {
@@ -54,8 +51,21 @@
     
     function addName() {
         const value = input.value;
+        input.value = '';
+        if (!value) {
+            input.placeholder = 'please enter a name';
+            return;
+        }
         console.log('value', value);
         names.push(value);
+        createNameLi(value);
+    }
+
+    function createNameLi(name) {
+        const li = document.createElement('li');
+        console.log('li', li);
+        li.innerText = name;
+        ul.appendChild(li);
     }
 </script>
 </body>
