@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    
+    button, input {
+        font-size: 40px;
+        padding: 10px;
+    }
+    
+    </style>
+</head>
+<body>
+    <h1>Name Generator</h1>
+        <button onclick="randomName()"></button>
+        <button>Random</button>
+        <input type="text"><button>Add</button>
+    
+
+    <ul>
+
+    </ul>
+
+<script>
+    const names = 
+    ['vinson', 'jonnywalker' 'Jaime Lopez' 'Jaime Marin' 'Joshua Bratton' 'Leo Ban' 'Maria Navarro' 'Fred' ];
+
+
+    const ul = document.querySelector('ul');
+    const button = document.querySelector('button');
+    const input = document.querySelector('input');
+    const addButton = document.querySelectorAll('button') [1];
+
+    addButton.addEventListener('click', addName );
+    for (let i = 0; i < names.length; i++) {
+        console.log(names[i]);
+        document.createElement('li');
+        console.log('li' li);
+        li.innerText = names[i];
+        ul.appendChild(li);
+    }
+function randomName() {
+    const randomNumber = Math.floor(Math.random() * names.length);
+    button.innerText = names[randomNumber];
+}
+
+    
+
+   
+
+</script>
+
+</body>
+</html>
