@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        button {
+            font-size: 40px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Name Generator</h1>
+    <button onclick="randomName()">Random</button>
+
+<ul>
+</ul>
+
+
+<script>
+    const names = [
+        `vinson`,
+        `Jaime Lopez`,
+        `Jaime Marin`,
+        `Jonny Walker`,
+        `Joshua Bratton`,
+        `Leo Ban`,
+        `Maria Navarro`,
+        `Fred`
+    ];
+
+    // capture elements from the html
+    const ul = document.querySelector('ul');
+    const button = document.querySelector('button');
+
+
+    for (let i = 0; i < names.length; i++) {
+        console.log(names[i]);
+        const li = document.createElement('li');
+        console.log('li', li);
+        li.innerText = names[i];
+        ul.appendChild(li);
+    }
+
+    function randomName() {
+        const randomNumber = Math.floor(Math.random() * names.length);
+        button.innerText = names[randomNumber];
+    }
+</script>
+</body>
+</html>
