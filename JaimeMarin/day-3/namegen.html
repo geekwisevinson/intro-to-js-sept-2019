@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,6 @@
             font-size: 40px;
             padding: 10px;
         }
-
         li {
             position: relative;
             left: 0;
@@ -39,19 +39,15 @@
         `Maria Navarro`,
         `Fred`
     ];
-
     // capture elements from the html
     const ul = document.querySelector('ul');
     const button = document.querySelector('button');
     const input = document.querySelector('input');
     const addButton = document.querySelectorAll('button')[1];
-
     addButton.addEventListener('click', addName );
-
     for (let i = 0; i < names.length; i++) {
         createNameLi(names[i]);
     }
-
     function randomName() {
         const randomNumber = Math.floor(Math.random() * names.length);
         button.innerText = names[randomNumber];
@@ -67,7 +63,6 @@
         names.push(value);
         createNameLi(value);
     }
-
     function createNameLi(name) {
         const li = document.createElement('li');
         li.innerText = name;
@@ -78,7 +73,6 @@
             li.classList.remove('offscreen');
         }, Math.floor(Math.random() * 1000));
     }
-
     function deleteMe() {
         this.classList.add('offscreen');
         const value = this.innerText;
