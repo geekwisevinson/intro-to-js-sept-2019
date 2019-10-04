@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whack-a-Mole v2</title>
+    <style>
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="score"></div>
+<div id="mole"></div>
+<script>
+    let score = 0;
+    // create mole state
+    const mole = {
+        width: 200,
+        height: 200,
+        x: 0,
+        y: 0,
+        backgroundColor: 'grey',
+    };
+    // get element with the mole id
+    const moleDiv = document.querySelector('#mole');
+    const scoreDiv = document.querySelector('#score');
+    // this function assigns the mole div the mole state
+    function displayMole() {
+        console.log('displayMole ran');
+        moleDiv.style.backgroundColor = mole.backgroundColor;
+        moleDiv.style.height = mole.height + 'px';
+        moleDiv.style.width = mole.width + 'px';
+        moleDiv.style.position = 'absolute';
+        moleDiv.style.left = mole.x + 'px';
+        moleDiv.style.top = mole.y + 'px';
+        scoreDiv.innerHTML = String(score);
+    }
+    function moveMole() {
+        const width = window.innerWidth - mole.width;
+        const height = window.innerHeight - mole.height;
+        mole.x = Math.floor( Math.random() * width );
+        mole.y = Math.floor( Math.random() * height);
+        if (mole.x < mole.width) {
+            mole.x = mole.width;
+        }
+        // if (mole.y < mole.height) {
+        //     mole.y = mole.height;
+        // }
+    }
+    setInterval( moveMole, 1000 );
+    moleDiv.addEventListener('click', function addScore() {
+        ++score;
+    })
+</script>
+<script>
+    function gameLoop() {
+        displayMole();
+        window.requestAnimationFrame(gameLoop);
+    }
+    gameLoop();
+</script>
+</body>
+</html>

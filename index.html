@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 69bfc4d951933ffce65924ad817e2e85e4d8763d
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Day 3</title>
@@ -11,3 +15,90 @@
  <h1>Ignacio Faria</h1>   
 </body>
 </html>
+=======
+    <title>Title</title>
+    <style>
+        body {
+            background: antiquewhite;
+        }
+
+        .todo, .done {
+            display: block;
+            width: 400px;
+            border: 1px black solid;
+            height: 100px;
+        }
+
+        a {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <a href="./vinson/index.html">Vinson</a>
+    <a href="./jonnywalker/index.html">Jonny Walker</a>
+    <a href="./jaimelopez/index.html">Jaime lopez</a>
+    <a href="./Joshua-Bratton/index.html">Joshua Bratton</a>
+    <a href="./marianavarro/index.html">Maria Navarro</a>
+    <a href="./leo-ban/index.html">Leo Ban</a>
+    <a href="./fred/index.html">Fred</a>
+    <a href="./JaimeMarin/index.html">Jaime Marin</a>
+<script>
+    function createH1(content) {
+        document.write('<h1>' + content + '</h1>')
+    }
+    function createH2(content) {
+        document.write('<h2>' + content + '</h2>')
+    }
+    function createEl(content, tag) {
+        const el = document.createElement(tag);
+        el.innerHTML = content;
+        document.body.appendChild(el);
+        return el;
+    }
+    // create title
+    createH1('another Title');
+
+    // create input elements
+    const input = createEl('', 'input');
+    const myButton = createEl('hi', 'button');
+
+    // add listeners and text
+    myButton.innerHTML = 'Click me';
+    const colors = ['red', 'white', 'blue', 'green'];
+    function onSubmit() {
+        const todo = document.querySelector('.todo');
+        const value = input.value;
+        input.value = '';
+        if (colors.includes(value)) {
+            myButton.style.textAlign = value;
+        } else {
+            const item = createEl(value, 'button');
+            item.addEventListener('mouseenter', function () {
+                doneList.appendChild(item);
+            });
+            todo.appendChild(item);
+        }
+    }
+    input.addEventListener('keydown', function (event) {
+        console.log('event', event);
+        if(event.key === 'Enter') {
+            onSubmit();
+        }
+    });
+    myButton.addEventListener('click', function () {onSubmit();} );
+
+    createEl('', 'br');
+    const todoList = createEl('', 'div');
+    const doneList = createEl('', 'div');
+
+
+    todoList.classList.add('todo');
+    doneList.classList.add('done');
+
+
+</script>
+
+</body>
+</html>
+>>>>>>> 69bfc4d951933ffce65924ad817e2e85e4d8763d
