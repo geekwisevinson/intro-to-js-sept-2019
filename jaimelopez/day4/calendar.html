@@ -16,6 +16,12 @@
             border: 1px solid black;
             display: inline-block;
         }
+        .non-active {
+            background: gray;
+        }
+        .active {
+            background: lime;
+        }
     </style>
 </head>
 <body>
@@ -35,6 +41,16 @@
 
     <script>
         const date = new Date();
+        const mm = date.getMonth() + 1;
+        const yyyy = date.getFullYear();
+        const firstDate = new Date('' + mm + '/01/' + yyyy ).getDay();
+        let lastDate =  new Date('' + mm + '/01/' + yyyy );
+        lastDate.setDate(lastDate.getDate() - 1);
+        lastDate = lastDate.getDate();
+        console.log(lastDate);
+        const days = 7;
+        const weeks = 5;
+
 
         const h2 = document.querySelector('h2');
         const elYear = document.querySelector('#year');
@@ -48,10 +64,10 @@
         elYear.innerText += date.getFullYear();
         elMonth.innerText += date.getMonth();
         elDay.innerHTML += date.getDay();
-        elTime.innerHTML += date.getTime();
 
-        const days = 7;
-        const weeks = 5;
+
+
+        let currentDay = 1;
         const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         for(let i = 0; i < weeks; i++) {
             const week = document.createElement('div');
@@ -62,10 +78,43 @@
                 day.classList.add('day');
                 week.appendChild(day);
                 day.innerText = weekdays[j];
+
+                console.log(lastDate, currentDay);
+                console.log(currentDay <= lastDate);
+                if( currentDay > firstDate && currentDay <= lastDate + firstDate + 1) {
+                    day.innerText += currentDay - firstDate;
+                } else {
+                    day.classList.add('non-active')
+                }
+
+                if (currentDay === date.getDate() + firstDate) {
+                    day.classList.add('active');
+                }
+
+                currentDay++;
+
+
             }
         }
 
 
+        console.log(firstDate);
+
+
+        function updateTime() {
+            const timeDate = new Date();
+            elTime.innerHTML = `${
+                timeDate.getHours() > 12 ?
+                    timeDate.getHours() - 12:
+                    timeDate.getHours()
+            }:${
+                timeDate.getMinutes()
+            }:${timeDate.getSeconds()}`;
+        }
+        updateTime();
+        setInterval(function () {
+            updateTime();
+        }, 1000)
     </script>
 </body>
 </html>
