@@ -4,40 +4,44 @@
     <meta charset="UTF-8">
     <title>Calendar</title>
     <style>
+
         .month {
             border: 1px solid red;
+            text-align: center;
         }
         .week {
-            border: 1px solid blue;
+            border: 1px solid black;
         }
         .day {
             width: 100px;
             height: 100px;
             border: 1px solid black;
             display: inline-block;
+            background-color: antiquewhite;
+            text-align: center;
         }
         .non-active {
-            background: gray;
+            background: grey;
         }
         .active {
-            background: lime;
+            background: linear-gradient(#e66465, #9198e5);
         }
     </style>
 </head>
 <body>
-    <h1>Calendar</h1>
-    <h2></h2>
 
-    <div id="year">Year:</div>
+<!--        <h1>Calendar</h1>-->
+        <h2></h2>
 
-    <div id="month">Month:</div>
+        <div id="year">Year:</div>
 
-    <div id="day">Day:</div>
+        <div id="month">Month:</div>
 
-    <div id="time">Time: </div>
-    <div class="month">
+        <div id="day">Day:</div>
 
-    </div>
+        <div id="time">Time:</div>
+
+        <div class="month"></div>
 
     <script>
         const date = new Date();
