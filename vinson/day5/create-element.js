@@ -1,3 +1,4 @@
+console.log('Create Element Loaded');
 function createElement(type, innerHTML, parent) {
     let el = null;
     if (type) {
