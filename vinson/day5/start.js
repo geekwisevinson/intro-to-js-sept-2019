@@ -4,6 +4,7 @@ function start() {
     nameDiv.innerHTML = 'NAME: ' + name;
     player.name = name;
     console.log('player', player);
+    loadPage(0);
 }
 
 start();
