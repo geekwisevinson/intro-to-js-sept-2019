@@ -26,11 +26,17 @@ pages.push(
     {
         page: 1,
         text: 'You choose to go into the dark. You find a ring',
+        answers: [
+            { text: 'Go back to where you came', page: 0},
+            {
+                text: 'Go right over the scary bridge', page: 2
+            }
+        ],
         getText: function() {
             return `${player.name} choose to go into the dark. ${player.name} found a ring!`
         },
         onLoad: function () {
-            player.inventory.push('ring');
+            player.inventory.push({type: 'ring', value: 300});
             console.log('added ring to inventory', player);
         }
     }
@@ -40,12 +46,33 @@ pages.push(
     {
         page: 2,
         text: 'The bridge was old and collapsed with you on it!',
+        answers: [
+            { text: 'Go left into the dark', page: 1},
+            {
+                text: 'Go back to the beginning', page: 0
+            }
+        ],
         getText: function() {
             return `The bridge was old and collapsed with you on it!. ${player.name} broke their leg!`
         },
         onLoad: function () {
-            player.health -= 10;
-            console.log('you took fall damage', player);
+            let foundIndex;
+            const hasRing = player.inventory.filter( function (item, index) {
+                const answer = item.type === 'ring';
+                if (answer) {
+                    foundIndex = index;
+                }
+               return answer ;
+
+            })[0];
+            if (hasRing) {
+                console.log('The ring was useful', player);
+                player.inventory.splice(foundIndex, 1);
+            } else {
+                player.health -= 10;
+                console.log('you took fall damage', player);
+            }
+
         }
     }
 );
