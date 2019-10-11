@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar</title>
+    <style>
+        .month {
+            border: 1px solid red;
+        }
+        .week {
+            border: 1px solid blue;
+        }
+        .day {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            display: inline-block;
+        }
+        .non-active {
+            background: gray;
+        }
+        .active {
+            background: lime;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calendar</h1>
+    <h2></h2>
+
+    <div id="year">Year:</div>
+
+    <div id="month">Month:</div>
+
+    <div id="day">Day:</div>
+
+    <div id="time">Time: </div>
+    <div class="month">
+
+    </div>
+
+    <script>
+        const date = new Date();
+        const mm = date.getMonth() + 1;
+        const yyyy = date.getFullYear();
+        const firstDate = new Date('' + mm + '/01/' + yyyy ).getDay();
+        let lastDate =  new Date('' + mm + '/01/' + yyyy );
+        lastDate.setDate(lastDate.getDate() - 1);
+        lastDate = lastDate.getDate();
+        console.log(lastDate);
+        const days = 7;
+        const weeks = 5;
+
+
+        const h2 = document.querySelector('h2');
+        const elYear = document.querySelector('#year');
+        const elMonth = document.querySelector('#month');
+        const elDay = document.querySelector('#day');
+        const elTime = document.querySelector('#time');
+        const container = document.querySelector('.month');
+
+        h2.innerText = date;
+
+        elYear.innerText += date.getFullYear();
+        elMonth.innerText += date.getMonth();
+        elDay.innerHTML += date.getDay();
+
+
+
+        let currentDay = 1;
+        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        for(let i = 0; i < weeks; i++) {
+            const week = document.createElement('div');
+            week.classList.add('week');
+            container.appendChild(week);
+            for(let j = 0; j < days; j++) {
+                const day = document.createElement('div');
+                day.classList.add('day');
+                week.appendChild(day);
+                day.innerText = weekdays[j];
+
+                console.log(lastDate, currentDay);
+                console.log(currentDay <= lastDate);
+                if( currentDay > firstDate && currentDay <= lastDate + firstDate + 1) {
+                    day.innerText += currentDay - firstDate;
+                } else {
+                    day.classList.add('non-active')
+                }
+
+                if (currentDay === date.getDate() + firstDate) {
+                    day.classList.add('active');
+                }
+
+                currentDay++;
+
+
+            }
+        }
+
+
+        console.log(firstDate);
+
+
+        function updateTime() {
+            const timeDate = new Date();
+            elTime.innerHTML = `${
+                timeDate.getHours() > 12 ?
+                    timeDate.getHours() - 12:
+                    timeDate.getHours()
+            }:${
+                timeDate.getMinutes()
+            }:${timeDate.getSeconds()}`;
+        }
+        updateTime();
+        setInterval(function () {
+            updateTime();
+        }, 1000)
+    </script>
+</body>
+</html>
