@@ -16,13 +16,13 @@ class Viewable {
         this.element.style.width = this.width + 'px';
         this.element.style.height = this.height + 'px';
         this.element.style.display = 'inline-block';
-        // this.element.style.position = 'absolute';
-        // this.element.style.left =  this.x + 'px';
-        // this.element.style.top = this.y + 'px';
+        this.element.style.position = 'absolute';
+        this.element.style.left =  this.x + 'px';
+        this.element.style.top = this.y + 'px';
     }
 }
 class Floor extends Viewable{
-    backgroundColor = 'yellow';
+    backgroundColor = 'brown';
     constructor() {
         super();
         this.applyAdj();
@@ -30,9 +30,53 @@ class Floor extends Viewable{
 }
 
 class Jumper extends Viewable{
+    fallSpeed = 2;
+    lift = 0;
+    canJump = true;
+    applyGravity() {
+        if (this.isAboveFloor()) {
+            if (this.isMovingUp()) {
+                this.lift -= .2;
+            }
+        } else {
+            this.lift = 0;
+        }
+
+        this.y += this.fallSpeed + -this.lift;
+
+    }
+
+    isAboveFloor() {
+        return this.y + this.height < floor.y;
+    }
+
+    isMovingUp () {
+        return this.lift > 0;
+    }
+
+    jump() {
+        console.log('jump', this);
+        this.lift = 5;
+    }
 }
 
 
 const floor = new Floor();
 const jumper = new Jumper();
 console.log('nouns', floor, jumper);
+
+floor.y = 300;
+floor.applyAdj();
+
+function gameLoop() {
+    jumper.applyGravity();
+    jumper.applyAdj();
+    window.requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+
+window.addEventListener('keydown', function () {
+    console.log('keydown', jumper);
+   jumper.jump();
+});
