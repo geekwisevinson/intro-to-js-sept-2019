@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Scope</h2>
+<script>
+
+ function universe() {
+     const capitol = 'some city';
+     function earth() {
+         const sun = 'fire';
+         function usa() {
+             const president = 'Guy';
+             function california() {
+
+                 function fresno() {
+                     const name = 'fresno'
+                     console.log(name, capitol, usa, );
+                 }fresno();
+                 function hollywood() {
+                     const name = 'hollywood';
+                     console.log(name, capitol);
+                 }hollywood();
+             }california();
+
+         }usa();
+     } earth();
+ }universe();
+
+
+
+</script>
+</body>
+</html>

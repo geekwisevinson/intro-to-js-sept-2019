@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Classes</h1>
+
+<script>
+
+
+    class Grandpa {
+        hair = 'dark';
+        constructor(percent) {
+            const randomNumber = Math.floor(Math.random() * 100);
+            this.assignHairColor(percent, randomNumber);
+        }
+        assignHairColor(percent, rn) {
+            this.hair = ['dark', 'light'][ percent > rn ? 1 : 0 ]
+        }
+    }
+
+    class Mom extends Grandpa {
+        eyes = 'dark';
+        constructor(percent) {
+            super(80);
+            const randomNumber = Math.floor(Math.random() * 100);
+            this.assignHairColor(percent, randomNumber);
+        }
+        assignHairColor(percent, rn) {
+            this.eyes = ['dark', 'light'][ percent > rn ? 1 : 0 ]
+        }
+    }
+
+
+
+    for (let i = 0; i < 100; i++) {
+        console.log('1', new Mom(80));
+        console.log('2', new Grandpa(20));
+    }
+
+    console.log(kid1, kid2);
+</script>
+
+</body>
+</html>
