@@ -1,0 +1,1 @@
+console.log('adj is loaded');

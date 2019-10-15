@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Scope</h2>
+
+
+
+    <script>
+
+    // function speak(word){
+    //     console.log(word);
+    // };
+    // speak('hi'); //what's in the '' will replace what's in (word)
+
+    // function outerFunction() {
+    //     const word='test'
+    //     speak(word);
+    // }
+
+    // outerFunction();
+    // outerFunction('funk');
+
+    function universe(){//start w/ a universe
+        //inside of it there is... 
+        function earth(){
+            const sun = 'star'
+            function usa(){
+                const president = 'Guy'
+                function california(){
+                    const capitol = 'some city'
+                    function fresno(){
+                        console.log('capitol');
+                    }fresno();
+
+                    function hollywood(){
+                        const name = 'hollywood';
+                        console.log(name, capitol);
+
+                    }; hollywood();
+
+                }california();
+            }usa();
+        }earth();
+    }universe();
+
+
+
+    </script>
+</body>
+</html>
