@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Scope</h2>
+<script>
+
+    const word = 'hi';
+    function speak(word){
+        console.log(word);
+    };
+
+
+    function outerFunction(){
+        speak(word);
+    }
+
+
+
+</script>
+</body>
+</html>
