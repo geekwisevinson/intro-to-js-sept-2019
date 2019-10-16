@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Http</title>
+</head>
+<body>
+
+<h1>HTTP</h1>
+
+
+<script>
+  const xhr = new XMLHttpRequest();
+  const url = 'https://jsonplaceholder.typicode.com/todos';
+  xhr.open('GET', url, false);
+  xhr.addEventListener("load", transferComplete);
+  xhr.send(null);
+  function transferComplete(e) {
+      const todos = JSON.parse(xhr.responseText);
+      todos.forEach( function (item) {
+          console.log(item);
+      });
+  }
+</script>
+</body>
+</html>

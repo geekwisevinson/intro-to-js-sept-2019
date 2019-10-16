@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Http</title>
+</head>
+<body>
+
+<h1>HTTP</h1>
+
+
+<script>
+    // variables = data;
+    const dataTypes = ['string', 'number', 'boolean', 'array', 'object'];
+    function myFunctionName() {
+        const dataTypes = 1;
+        console.log(dataTypes);
+    }
+    // functions = actions
+    myFunctionName();
+
+    // classes = blueprints for objects
+    class Animal {
+        diet = '';
+        connstructor(diet) {
+            this.diet = diet;
+        }
+    }
+    class Bird extends Animal {
+        constructor(canFly, diet) {
+            super(diet);
+            this.canFly = canFly;
+        }
+    }
+
+    // document = holder elements. Elements are Classes
+    console.dir(document.body);
+    const elements = [
+        document.createElement('h1'),
+        document.createElement('button'),
+        document.createElement('h1'),
+        document.createElement('button')
+    ];
+    console.dir(elements);
+
+    // case
+    const sentence = 'This is a sentence.';
+    const lower = 'this is a sentence.';
+    const upper = 'THIS IS A SENTENCE.';
+    const camel = 'lowerUpperCase';
+    const pascal = 'LowerUpperCase';
+    person = {
+        fullName : 'vinson'
+    };
+    console.log(person.fullName);
+</script>
+</body>
+</html>
