@@ -78,7 +78,7 @@
     // http stuff;
     function get(what, transferComplete) {
         const xhr = new XMLHttpRequest();
-        const url = 'https://jsonplaceholder.typicode.com/' + what;
+        const url = 'https://my-json-server.typicode.com/geekwisevinson/intro-to-js-sept-2019/' + what;
         xhr.open('GET', url, false);
         xhr.addEventListener("load", transferComplete);
         xhr.send(null);
