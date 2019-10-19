@@ -85,6 +85,19 @@
         transferComplete(xhr);
     }
 
+    function post(what, transferComplete) {
+        const xhr = new XMLHttpRequest();
+        const url = 'https://my-json-server.typicode.com/geekwisevinson/intro-to-js-sept-2019/' + what;
+        xhr.open('POST', url, false);
+        xhr.addEventListener("load", transferComplete);
+        xhr.send(JSON.stringify({ "id": 3, "body": "some comment", "postId": 1 }));
+        transferComplete(xhr);
+    }
+
+    post('users', function () {
+        getUsers()
+    });
+
 
     // handlers what to do when something
     function getPhotos() {

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            height: 100%;
+            margin: 0;
+            background-color: gray;
+        }
+        #main {
+            background-color: yellow;
+            height: 100%;
+            width: 100%;
+        }
+        #side {
+            background-color: blue;
+            height: 100%;
+            width: 300px;
+            transition: ease-in-out all 1s;
+        }
+        #side ul {
+            list-style: none;
+            font-size: 30px;
+            color: white;
+            font-weight: bolder;
+        }
+        #side.closed ul {
+            list-style: none;
+            font-size: 10px;
+            color: blue;
+            font-weight: bolder;
+        }
+        button  {
+            font-size: 40px;
+            background-color: red;
+            color: wheat;
+        }
+        #side.closed {
+            width: 0;
+        }
+        .selected {
+            font-size: 50px;
+            color: lime;
+        }
+        li {
+            transition: ease all 2s;
+        }
+    </style>
+</head>
+<body>
+<div id="side" class="closed">
+    <ul>
+    </ul>
+</div>
+<div id="main">
+    <button onclick="toggle()">Toggle</button>
+</div>
+
+<script>
+    const side = document.querySelector('#side');
+
+    function toggle() {
+        if (side.classList.contains('closed')) {
+            side.classList.remove('closed');
+        } else {
+            side.classList.add('closed');
+        }
+    }
+
+    class MyLi {
+        element = document.createElement('li');
+        constructor(text) {
+            this.element.innerHTML = text;
+            this.element.addEventListener('click', function () {
+                console.log(text);
+                document.querySelectorAll('li').forEach( li => {
+                    li.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+            document.querySelector('ul').appendChild(this.element);
+        }
+    }
+
+    new MyLi('Home');
+    new MyLi('About');
+    new MyLi('Contact');
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Data Structures</h1>
+<p>
+    Everything is an object
+</p>
+<p>
+    There are three primitive types
+</p>
+<ul>
+    <li>Number</li>
+    <li>String</li>
+    <li>Boolean</li>
+</ul>
+<p>
+    And a couple complex
+</p>
+
+<ul>
+    <li>Array</li>
+    <li>Objects</li>
+</ul>
+
+<h2>Ideas</h2>
+<ul>
+    <li>animations</li>
+    <li>menus</li>
+    <li>formatting</li>
+    <li>Syntax</li>
+    <li>constructors</li>
+    <li>scope</li>
+    <li>eventListeners</li>
+    <li>debugging/ troubleshooting</li>
+</ul>
+
+<script>
+    const ul = document.createElement('ul');
+    document.body.append(ul);
+    const list = ['max', 'joe', 'joe', 'joe', 'moe', 'zak', 'joe', 'moe', 'zak', 'moe', 'zak'];
+
+    const list2 = ['joe', 'moe', 'zak'];
+    const values = [3, 3, 2];
+    function two() {
+        list2.forEach( (student, index) => {
+            const li = document.createElement('li');
+            ul.appendChild(li);
+            li.innerHTML = `${student}: ${values[index]}`;
+        });
+    }
+    two();
+    const list3 = [{name: 'joe', att: 7}, {name: 'moe', att: 5}, {name: 'zak', att: 5}];
+
+    function three() {
+       list3.forEach( student => {
+           const li = document.createElement('li');
+           li.innerHTML = student.name + ': ' + student.att;
+           ul.appendChild(li);
+       })
+    }
+
+    three();
+
+    function one() {
+        const students = {};
+        list.forEach( student => {
+            if (!students[student]) {
+                students[student] = 1;
+            } else  {
+                students[student] += 1;
+            }
+        });
+        Object.keys(students).forEach( student => {
+            const li = document.createElement('li');
+            ul.appendChild(li);
+            li.innerHTML = `${student}: ${students[student]}`;
+        });
+    }
+    one();
+</script>
+</body>
+</html>
