@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <h1>HTTP</h1>
+    
+    <script>
+        const dataTypes= ['string', 'number', 'boolean', 'array', 'object'];
+        function myFunctionName() {
+            const dataTypes = 1;
+            console.log(dataTypes);
+        }
+        myFunctionName();
+
+        // functions are sets of instructions. 
+
+        class Animal {
+            diet = '';
+            constructor(diet) {
+                this.diet = diet; 
+            }
+        }
+        class Bird extends Animal {
+            constructor(canfly, diet) {
+                super(diet);
+                this.canFly = canfly;
+            }
+        }
+
+        // <!-- classes are blueprints, super takes properties of other classes. -->
+
+        // document= holder for elements, Elements are classes.
+        console.dir(document.body);
+        const elements = [
+        document.createElement('h1'),
+        document.createElement('button'),
+        document.createElement('h1'),
+        document.createElement('button'),
+        ];
+
+        // to call an index you just put the variable/const name in the array elements[2] or elements["length"]
+
+        // myObj = {2: 'hello'};
+        // myObj[2]
+        // elements.forEach( function (i) {console.log(i)})
+        // array class has special properties that other classes can't really access: forEach() includes ().
+
+        console.dir(elements);
+
+        // console.dir will show you all the properties of a class/object deep diving.
+
+        // when you use . <-- make sure you camelCase.
+        // case
+            // 'This is a sentence'
+        
+            const sentence = 'This is a sentence';
+            const lower = 'This is a sentence';
+            const upper = 'THIS IS A SENTENCE.';
+            const camel = 'lowerUpperCase';
+            const pascal = 'LowerUpperCase';
+
+            person = {
+                fullName : 'fred'
+            }
+
+            console.log(person.fullName);
+            // console.log(person.full name) <-- will not work. 
+
+        </script>
+
+        
+
+
+
+
+</body>
+</html>
