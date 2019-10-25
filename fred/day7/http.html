@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Http</title>
+    <style>
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        .container > * {
+            flex: 1;
+            border: 1px solid black;
+        }
+        button {
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>HTTP</h1>
+<button onclick="getUser(2)">2</button>
+<button onclick="getUsers()">Users</button><button onclick="getPhotos()">Photos</button>
+<div class="container">
+    <div id="list"></div>
+    <div id="detail"></div>
+</div>
+
+
+<script>
+    const container = document.querySelector('.container');
+    const list = document.querySelector('#list');
+    const detail = document.querySelectorAll('#detail')[0];
+    // get arrays
+    function GetUsers(xhr) {
+      createList(xhr, ['name', 'email', 'id'], getUser);
+    }
+    function GetPhotos(xhr) {
+        createList(xhr, ['id', 'title'], getPhoto )
+    }
+    function createList(xhr, props, callback) {
+        const items = JSON.parse(xhr.response);
+        console.log('items', items);
+        items.forEach( (item) => {
+            const ul = document.createElement('ul');
+            ul.style.listStyle = 'none';
+            ul.addEventListener('click', function () {
+                callback(item.id);
+            });
+            list.appendChild(ul);
+            props.forEach( prop => {
+                createItemProp(prop, item, ul);
+            });
+        })
+    }
+    function createItemProp(property, user, ul) {
+        const li = document.createElement('li');
+        li.innerHTML = property + ': ' + user[property];
+        ul.appendChild(li);
+    }
+    // by id
+    function GetUserByID(xhr) {
+        const user = JSON.parse(xhr.responseText);
+        console.log('user', user);
+        detail.innerHTML = JSON.stringify(user);
+    }
+    function GetPhotoByID(xhr) {
+        const photo = JSON.parse(xhr.responseText);
+        console.log('photo', photo);
+        detail.innerHTML = '<img src="' + photo.url + '"/>'
+    }
+    // http stuff;
+    function get(what, transferComplete) {
+        const xhr = new XMLHttpRequest();
+        const url = 'https://jsonplaceholder.typicode.com/' + what;
+        xhr.open('GET', url, false);
+        xhr.addEventListener("load", transferComplete);
+        xhr.send(null);
+        transferComplete(xhr);
+    }
+    // handlers what to do when something
+    function getPhotos() {
+        get('photos', GetPhotos );
+    }
+    function getUsers() {
+        get('users', GetUsers);
+    }
+    function getUser(id) {
+        get('users/' + id, GetUserByID );
+    }
+    function getPhoto(id) {
+        get('photos/' + id, GetPhotoByID );
+    }
+</script>
+</body>
+</html>

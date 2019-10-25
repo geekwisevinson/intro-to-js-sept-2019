@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        button, input {
+            font-size: 40px;
+            padding: 10px;
+        }
+        li {
+            position: relative;
+            left: 0;
+            transition: all 1s ease-in-out;
+        }
+        .offscreen {
+            left: -200px;
+        }
+    </style>
+</head>
+<body>
+<h1>Name Generator</h1>
+    <button onclick="randomName()">Random</button>
+
+<input type="text"><button>Add</button>
+<ul>
+</ul>
+
+
+<script>
+    const names = [
+        `vinson`,
+        `Jaime Lopez`,
+        `Jaime Marin`,
+        `Jonny Walker`,
+        `Joshua Bratton`,
+        `Leo Ban`,
+        `Maria Navarro`,
+        `Fred`
+    ];
+    // capture elements from the html
+    const ul = document.querySelector('ul');
+    const button = document.querySelector('button');
+    const input = document.querySelector('input');
+    const addButton = document.querySelectorAll('button')[1];
+    addButton.addEventListener('click', addName );
+    for (let i = 0; i < names.length; i++) {
+        createNameLi(names[i]);
+    }
+    function randomName() {
+        const randomNumber = Math.floor(Math.random() * names.length);
+        button.innerText = names[randomNumber];
+    }
+    
+    function addName() {
+        const value = input.value;
+        input.value = '';
+        if (!value) {
+            input.placeholder = 'please enter a name';
+            return;
+        }
+        names.push(value);
+        createNameLi(value);
+    }
+    function createNameLi(name) {
+        const li = document.createElement('li');
+        li.innerText = name;
+        ul.appendChild(li);
+        li.classList.add('offscreen');
+        li.addEventListener('click', deleteMe);
+        setTimeout(function () {
+            li.classList.remove('offscreen');
+        }, Math.floor(Math.random() * 1000));
+    }
+    function deleteMe() {
+        this.classList.add('offscreen');
+        const value = this.innerText;
+        console.log(value, names.indexOf(value));
+        names.splice(names.indexOf(value), 1);
+        setTimeout( () => {
+            this.remove();
+        }, 1000);
+    }
+</script>
+</body>
+</html>

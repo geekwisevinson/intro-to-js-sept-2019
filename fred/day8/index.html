@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+            html {
+                height: 100%
+            }
+            body{
+                display: flex;
+                height: 100%;
+                margin: 0;
+                background-color: gray;
+            }
+
+            #main {
+                background-color: yellow; 
+                height: 100%;
+                width: 100%;
+            }
+
+            #side {
+                background-color: blue; 
+                font-size: 30px;
+                color: wheat;
+                width: 1000px;
+                height: 100%;
+                transition: ease-in-out all 1s;
+            }
+
+            #side ul {
+                list-style: none; 
+                font-size: 20px; 
+                color: white; 
+                font-weight: bolder;
+            }
+
+            button {
+                font-size: 40px; 
+                background-color: red; 
+                color: white; 
+            }
+
+            #side.closed {
+                width: 0;
+              
+            }
+
+            #side.closed ul {
+                list-style: none; 
+                font-size: 10px; 
+                color: blue; 
+                font-weight: bolder;
+            }
+        </style>
+</head>
+<body>
+    
+<h1>Data Structures</h1>
+<p>
+    Everything is an object, think of a function like a contract. 
+    If you put in "this data type" for "this type of function", the function will always present the data a certain way 100% of the time.
+    
+    Check out MDN for figuring out how to use everything. 
+    Codewars, to get more practice.
+</p>
+
+<p>
+    There are three primitive types
+</p>
+
+<p>
+    <ul>
+        <li>
+        Numbers
+        </li>
+            <li>
+            Strings
+            </li>
+                <li>
+                Booleans
+                </li>
+    </ul>
+</p>
+
+<ul>
+    <li>
+        Arrays
+    </li>
+    <li>
+        Objects
+    </li>
+</ul>
+
+<p>
+</p>
+
+
+<div id="side" class="closed">
+    <ul>
+        <li>Home</li>
+            <li>About</li>
+                <li>Contact</li>
+    </ul>
+</div>
+<div id="main">
+    <button onclick="toggle()">Toggle</button>
+</div>
+
+
+
+<script>
+    const side = document.querySelector('#side');
+    // gives a reference to that i.d.
+    
+    function toggle (){
+        if(side.classList.contains('closed')) {
+            side.classList.remove('closed');
+        } else {
+            side.classList.add('closed');
+        }
+        
+    }
+// constructor here (reivew this)
+//behave like an HTML element = HTMLIElement
+    class MyLi {
+            element = document.createElement('li');
+            constructor(text) {
+                this.element.innerHTML = text; 
+                this.element.addEventListener('click', function() {
+                    console.log(text);
+                })
+            }
+    }
+
+    const myLi = new MyLi();
+    docoument.querySelector('ul').appendChild(myLi.element);
+
+</script>
+
+
+</body>
+</html>
