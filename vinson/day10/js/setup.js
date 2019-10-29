@@ -20,6 +20,8 @@ const utilityAddEventListener = 'add event listener';
 const utilityUpdateText = 'update text';
 const utilityRandomNumber = 'get random number';
 const utilityNestElements = 'nest elements';
+const utilityHttpCalls = 'http calls';
+const utilityLoops = 'js loops';
 
 // add buttons and listeners
 addSkill(utilityGetElementReference);
@@ -29,6 +31,8 @@ addSkill(utilityAddEventListener);
 addSkill(utilityUpdateText);
 addSkill(utilityRandomNumber, 'js');
 addSkill(utilityNestElements);
+addSkill(utilityHttpCalls, 'js');
+addSkill(utilityLoops, 'js');
 
 // skill functions
 function getElementReference() {
@@ -127,6 +131,43 @@ function nestElements() {
     `)
 }
 
+function httpCalls() {
+    beltText(`
+        const xhr = new XMLHttpRequest();
+        <br>
+        xhr.onreadystatechange = function(res) {
+        <br>
+        console.log(res);
+        <br>
+        }
+        <hr>
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos');
+        <br>
+        xhr.send();
+        <hr>
+        xhr.open('POST', 'https://jsonplaceholder.typicode.com/todos');
+        <br>
+        xhr.send({todo: null});
+        <br>
+    `)
+}
+
+function jsLoops() {
+    beltText(`
+        [0, 1, 2].forEach( function(number) {
+        <br>
+        console.log(number);
+        <br>
+        }
+        <hr>
+        for ( let i = 0; i < 3; i++ ) {
+        <br>
+        console.log(i);
+        <br>
+        }
+    `);
+}
+
 // helpers
 function chooseTheRightUtility() {
     //"this" is the button in this case
@@ -149,6 +190,10 @@ function chooseTheRightUtility() {
             return randomNumber();
         case utilityNestElements:
             return nestElements();
+        case utilityHttpCalls:
+            return httpCalls();
+        case utilityLoops:
+            return jsLoops();
         default:
             console.log('these are not the same', utility)
     }
@@ -168,7 +213,6 @@ function addActiveClass(el) {
         } else {
             button.classList.remove('active');
         }
-
     })
 }
 
