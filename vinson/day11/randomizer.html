@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="number" placeholder="low">
+<input type="number" placeholder="high">
+<button>Click</button>
+<h2></h2>
+
+<script>
+    const button = document.querySelector('button');
+    const low = document.querySelectorAll('input')[0];
+    const high = document.querySelectorAll('input')[1];
+    const h2 = document.querySelector('h2');
+    console.log(low, high);
+    function functionName() {
+        console.log('you clicked the button');
+        console.log(low.value, high.value);
+        console.log('random', random(high.value, low.value));
+        h2.innerText = random(high.value, low.value);
+    }
+    function random ( high, low ) {
+        console.log('high', typeof high, 'low', typeof low);
+        return Math.floor( Math.random() * Number(high - low)) + Number(low);
+    }
+    button.addEventListener('click', functionName );
+</script>
+</body>
+</html>

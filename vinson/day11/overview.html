@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview</title>
+</head>
+<body>
+    <h1>Overview</h1>
+    <h2>Data Structures</h2>
+        <pre>
+            PRIMITIVE
+            strings
+            numbers
+            booleans
+
+            COMPLEX
+            objects
+            arrays
+        </pre>
+    <h2>Functions</h2>
+        <pre>
+            CLASSIC
+            function functionName(parameter1, parameter2) {
+                console.log(parameter1, parameter2);
+            }
+            ARROW
+            ( parameter1, parameter2) => console.log(parameter1, parameter2);
+        </pre>
+
+    <h2>Scope</h2>
+    <pre>
+          function test() {
+            console.log(this);
+            if (this['remove']) {
+                this.remove();
+            } else {
+                console.log('not an element')
+            }
+        }
+
+        const name = 'object1';
+        const obj1 = {name, test, remove:  function remove() {
+                console.log('remove');
+            } };
+        const el = document.querySelector('h1');
+
+        test();
+        obj1.test();
+        el.addEventListener('click', test);
+    </pre>
+    <h2>Dom</h2>
+    <pre>
+
+        <ul>
+            <li></li>
+        </ul>
+
+    </pre>
+    <h2>Http</h2>
+
+<pre>
+    const xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function(res) {
+console.log(res);
+}
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos');
+xhr.send();
+xhr.open('POST', 'https://jsonplaceholder.typicode.com/todos');
+xhr.send({todo: null});
+</pre>
+
+<h2>
+    Loops
+</h2>
+<pre>
+    [0, 1, 2].forEach( function(number) {
+console.log(number);
+}
+for ( let i = 0; i < 3; i++ ) {
+console.log(i);
+}
+</pre>
+
+</body>
+</html>

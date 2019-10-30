@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .calc {
+            width: 400px;
+            height: 500px;
+            background-color: grey;
+        }
+
+        .display {
+            background-color: darkgreen;
+            height: 100px;
+            color: white;
+            font-size: xx-large;
+        }
+
+        .simple {
+            display: flex;
+        }
+        .simple button {
+            flex: 1;
+            height: 100px;
+            font-size: xx-large;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calc">
+        <div class="display"></div>
+        <div class="buttons"></div>
+        <div class="simple">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>/</button>
+        </div>
+        <div class="simple">
+
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>*</button>
+
+        </div>
+        <div class="simple">
+
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>+</button>
+
+        </div>
+
+        <div class="simple">
+
+            <button>0</button>
+            <button>.</button>
+            <button>-</button>
+            <button>=</button>
+
+        </div>
+    </div>
+
+    <script>
+        const display = document.querySelector('.display');
+        function handle () {
+            console.log(this.innerText);
+            const text = this.innerText;
+            if (text === '=') {
+                display.innerText = eval(display.innerText);
+            } else {
+                display.innerText += this.innerText;
+            }
+        }
+        document.querySelectorAll('button').forEach( function (button) {
+            button.addEventListener('click', handle)
+        });
+    </script>
+</body>
+</html>

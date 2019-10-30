@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        button {
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Name GEn</h1>
+<button>Click</button>
+<h2></h2>
+
+
+<script>
+    const names = ['Larry', 'Moe', 'Curly', 'Shemp'];
+
+    const button = document.querySelector('button');
+    const h2 = document.querySelector('h2');
+
+    button.addEventListener('click', () => {
+        console.log('click');
+        h2.innerHTML = names.sort(function (a, b) {
+            return Math.floor(Math.random() * 2) - 1;
+        })[0];
+    });
+</script>
+</body>
+</html>

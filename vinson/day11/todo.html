@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Todo</h1>
+<input type="text">
+<button>Add</button>
+<h2>Incomplete</h2>
+<ul></ul>
+<h2>Complete</h2>
+<ul></ul>
+
+<script>
+    function qs(search) {
+        return document.querySelector(search);
+    }
+    function qsa(search) {
+        return document.querySelectorAll(search);
+    }
+    const input = qs('input');
+    const button = qs('button');
+    const incomplete = qsa('ul')[0];
+    const completed = qsa('ul')[1];
+
+
+    button.addEventListener('click', function () {
+        console.log(input.value);
+        const li = document.createElement('li');
+        incomplete.appendChild(li);
+        li.innerText = input.value;
+        input.value = '';
+        li.addEventListener('click', function () {
+            completed.appendChild(this);
+        })
+    })
+
+
+
+</script>
+</body>
+</html>
