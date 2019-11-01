@@ -3,11 +3,18 @@ class Scenes {
     sceneIds = {};
     currentSceneId = null;
 
-    constructor(props) {
+    addScene(scene) {
+        this.sceneIds[scene.id] = scene;
+        this.scenes.push(scene);
+        scene.scenes = this;
+
+
+        if (!this.currentSceneId) {
+            this.currentSceneId = scene.id;
+        }
     }
 
-    addScene(scene) {
-        this.sceneIds[scene.id] = scene.id;
-        this.scenes.push(scene);
+    renderScene() {
+        this.sceneIds[this.currentSceneId].renderView();
     }
 }
