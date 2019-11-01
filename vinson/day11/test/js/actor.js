@@ -14,7 +14,6 @@ class Actor {
         this.listenForTransitionEnd();
         document.querySelector('#view').appendChild(this.element);
         this.element.style.position = 'absolute';
-        console.log('actor created', this.element);
     }
     render() {
         if (!this.element) {this.createElement()}
@@ -59,21 +58,56 @@ class Actor {
     }
     updateStyles(config) {
         this.config = {...this.config, ...config};
+        console.log('update name', config.name);
         setTimeout(function () {
             this.render();
         }.bind(this),0);
-
-        console.dir(this.element);
     }
 
     listenForTransitionEnd() {
-        this.element.addEventListener('transitionend', () => {
-            console.log('transend', this.changeQue[0]);
+        this.element.addEventListener('transitionend', (e) => {
+            console.log('propname', e.propertyName);
+            const prop = e.propertyName.replace(/-\w/g, function(m) {
+                return m[1].toUpperCase();
+            });
             if (this.changeQue.length) {
-                this.changeQue.shift();
-                this.runNextChange();
+                delete this.changeQue[0]['name'];
+                delete this.changeQue[0]['transition'];
+                if (this.changeQue[0].hasOwnProperty(prop)) {
+                    this.tryDeleteProp(prop);
+                    this.isChangeQueFinished();
+                } else {
+                    console.log('it does not have this prop', prop, this.changeQue[0]);
+                    console.log(this.changeQue[0]);
+                    switch (prop) {
+                        case 'left':
+                            this.tryDeleteProp('x');
+                            break;
+                        case 'top':
+                            this.tryDeleteProp('y');
+                            break;
+                        default:
+                            break;
+                    }
+                    this.isChangeQueFinished();
+                }
+
             }
         })
+    }
+
+    isChangeQueFinished() {
+        if (Object.keys(this.changeQue[0]).length === 0) {
+            this.changeQue.shift();
+            this.runNextChange();
+        } else {
+            console.log('not done', Object.keys(this.changeQue[0] ));
+        }
+    }
+
+    tryDeleteProp( prop ){
+        const isDeleted = delete this.changeQue[0][prop];
+        console.log(prop, 'is', isDeleted)
     }
 
     addChange(change) {
@@ -84,9 +118,17 @@ class Actor {
         }
     }
     runNextChange() {
-        console.log('run next', this.changeQue[0]);
         if (this.changeQue.length) {
+            console.log('run next', this.changeQue[0]);
             this.updateStyles(this.changeQue[0]);
         }
+    }
+
+    convertToCamel(str) {
+            return str
+                .replace(/\s(.)/g, function($1) { return $1.toUpperCase(); })
+                .replace(/\s/g, '')
+                .replace(/^(.)/, function($1) { return $1.toLowerCase(); });
+
     }
 }
