@@ -66,18 +66,17 @@ class Actor {
 
     listenForTransitionEnd() {
         this.element.addEventListener('transitionend', (e) => {
-            console.log('propname', e.propertyName);
-            const prop = e.propertyName.replace(/-\w/g, function(m) {
-                return m[1].toUpperCase();
-            });
+            const originalPropName = e.propertyName;
+            console.log('propName', e.propertyName);
+            console.log(this.changeQue[0])
+            const prop = this.convertKebabToCamel(e.propertyName);
             if (this.changeQue.length) {
-                delete this.changeQue[0]['name'];
-                delete this.changeQue[0]['transition'];
+                this.cleanUpTransition()
                 if (this.changeQue[0].hasOwnProperty(prop)) {
                     this.tryDeleteProp(prop);
                     this.isChangeQueFinished();
                 } else {
-                    console.log('it does not have this prop', prop, this.changeQue[0]);
+                    console.log('!!!!! t does not have this prop', prop, this.changeQue[0], originalPropName);
                     console.log(this.changeQue[0]);
                     switch (prop) {
                         case 'left':
@@ -124,11 +123,42 @@ class Actor {
         }
     }
 
-    convertToCamel(str) {
-            return str
-                .replace(/\s(.)/g, function($1) { return $1.toUpperCase(); })
-                .replace(/\s/g, '')
-                .replace(/^(.)/, function($1) { return $1.toLowerCase(); });
+    convertKebabToCamel(str) {
+        return str.replace(/-\w/g, function(m) {
+            return m[1].toUpperCase();
+        })
+    }
+
+    cleanUpTransition() {
+        const borders = [
+            "border-left",
+            "border-right",
+            "border-bottom",
+            "border-radius"
+        ];
+
+        const removable = ['', 'name', 'transition', ...borders];
+        removable.forEach(item => {
+            delete this.changeQue[0][item];
+
+        });
+        const keys = Object.keys(this.changeQue[0]);
+        keys.forEach( key => {
+            console.log(key, this.changeQue[0], this.changeQue[0][key]);
+            if (
+                (this.changeQue[0][key]) &&
+                ((this.changeQue[0][key].toString().trim() === this.element.style[key].trim())
+                || (this.changeQue[0][key].toString().trim() + 'px' === this.element.style[key].trim()))
+            ) {
+                delete this.changeQue[0][key];
+            } else {
+                console.log('it is not the same', key);
+                console.log( this.changeQue[0][key]);
+                console.log( this.element.style[key]);
+            }
+        });
+
+        console.log(this.changeQue[0], this.element.style)
 
     }
 }

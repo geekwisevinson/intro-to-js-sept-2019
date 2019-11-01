@@ -15,37 +15,47 @@ scene.actors[1].addChange({
     y: 200,
     transition: 'all 2s',backgroundColor: 'black', width: '50'});
 
-scene.actors[1].addChange({
-    name: 'go triangle',
-    transition: 'all .5s',
-    width: 0,
-    height: 0,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: '50px',
-    borderLeftColor: 'transparent',
-    borderRightStyle: 'solid',
-    borderRightWidth: '50px',
-    borderRightColor: 'transparent',
-    borderBottomStyle: 'solid',
-    borderBottomWidth: '100px',
-    borderBottomColor: 'red',
-    backgroundColor: 'transparent'
-});
 
 
-scene.actors[1].addChange({
+const triangle = {
+    ...this.convertCssStringToObject(shapes.triangle),
     name: 'go triangle2',
+    backgroundColor: 'transparent',
     transition: 'all .5s',
-    width: 0,
-    height: 0,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: '50px',
-    borderLeftColor: 'transparent',
-    borderRightStyle: 'solid',
-    borderRightWidth: '50px',
-    borderRightColor: 'transparent',
-    borderBottomStyle: 'solid',
-    borderBottomWidth: '100px',
-    borderBottomColor: 'blue',
-    backgroundColor: 'transparent'
-});
+
+
+};
+scene.actors[1].addChange(triangle);
+
+
+const pac = {
+    ...this.convertCssStringToObject(shapes.pacMan),
+    name: 'go triangle2',
+    backgroundColor: 'transparent',
+    transition: 'all .5s',
+
+
+};
+scene.actors[1].addChange(pac);
+
+const egg = {
+    ...this.convertCssStringToObject(shapes.triangle),
+    name: 'go triangle2',
+    backgroundColor: 'transparent',
+    transition: 'all .5s',
+
+
+};
+scene.actors[1].addChange(egg);
+
+function convertCssStringToObject(input) {
+    let result = {},
+        attributes = input.trim().split(';');
+
+    for (let i = 0; i < attributes.length; i++) {
+        let entry = attributes[i].split(':');
+        result[entry.splice(0,1)[0].replace(/\s/g, "")] = entry.join(':');
+    }
+    console.log("**** result", result)
+    return result;
+}
