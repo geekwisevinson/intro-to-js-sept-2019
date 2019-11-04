@@ -26,7 +26,7 @@ class Actor {
         Object.keys(config).forEach( style => {
             if (!['id'].includes(style)) {
                 let styleName = style;
-                let value = config[style];
+                let value = String(config[style]);
                 switch (style) {
                     case 'x':
                         styleName = 'left';
@@ -35,18 +35,22 @@ class Actor {
                         styleName = 'top';
                         break;
                 }
-
                 switch (style) {
+
                     case 'x':
+                        if (!value.includes('px'))
                         value += 'px';
                         break;
                     case 'y':
+                        if (!value.includes('px'))
                         value += 'px';
                         break;
                     case 'width':
+                        if (!value.includes('px'))
                         value += 'px';
                         break;
                     case 'height':
+                        if (!value.includes('px'))
                         value += 'px';
                         break;
                 }
@@ -57,8 +61,9 @@ class Actor {
         })
     }
     updateStyles(config) {
+        console.log('update styles', config);
         this.config = {...this.config, ...config};
-        console.log('update name', config.name);
+        console.log('update', config);
         setTimeout(function () {
             this.render();
         }.bind(this),0);
@@ -68,45 +73,70 @@ class Actor {
         this.element.addEventListener('transitionend', (e) => {
             const originalPropName = e.propertyName;
             console.log('propName', e.propertyName);
-            console.log(this.changeQue[0])
+
+            console.log('changeQue[0]', this.changeQue[0]);
             const prop = this.convertKebabToCamel(e.propertyName);
+            console.log('que', this.changeQue);
             if (this.changeQue.length) {
-                this.cleanUpTransition()
-                if (this.changeQue[0].hasOwnProperty(prop)) {
-                    this.tryDeleteProp(prop);
-                    this.isChangeQueFinished();
-                } else {
-                    console.log('!!!!! t does not have this prop', prop, this.changeQue[0], originalPropName);
-                    console.log(this.changeQue[0]);
-                    switch (prop) {
-                        case 'left':
-                            this.tryDeleteProp('x');
-                            break;
-                        case 'top':
-                            this.tryDeleteProp('y');
+                const testKeys = Object.keys(this.changeQue[0]);
+                const ignore = ['name'];
+                const missing = [];
+                let destroy = false;
+                testKeys.forEach( key => {
+                    if (!key) return;
+
+                    const computed = getComputedStyle(this.element);
+                    switch (key) {
+                        case 'name':
                             break;
                         default:
-                            break;
+                            console.log('run this if valid');
+                            if(!this.changeQue[0]) {return;}
+                            if (this.changeQue[0][key] === computed[key]) {
+                                console.log('same');
+                                console.log(key);
+                                console.log(this.changeQue[0][key]);
+                                console.log(computed[key]);
+                                if (!missing.length) {
+                                   destroy = true;
+                                } else {
+                                    console.log('missing', missing);
+                                    missing.forEach( item => {
+                                        console.log(item);
+                                        console.log(this.changeQue[0][item]);
+                                        console.log(computed[item]);
+                                        const update = {};
+                                        update[this.convertKebabToCamel(item)] = this.changeQue[0][item];
+                                        this.updateStyles(update);
+                                        console.log(this.element)
+                                    })
+                                }
+                            } else {
+                                console.log('DIFFERENT');
+                                console.log(key);
+                                console.log(this.changeQue[0][key]);
+                                console.log(computed[key]);
+                                missing.push(key);
+                                console.log('missing', key, missing);
+                                console.log('????????????????????????');
+                                destroy = false;
+                            }
                     }
-                    this.isChangeQueFinished();
-                }
 
+
+                });
+                if (destroy) {
+                    this.completeChange();
+                }
             }
         })
     }
 
-    isChangeQueFinished() {
-        if (Object.keys(this.changeQue[0]).length === 0) {
-            this.changeQue.shift();
-            this.runNextChange();
-        } else {
-            console.log('not done', Object.keys(this.changeQue[0] ));
-        }
-    }
-
-    tryDeleteProp( prop ){
-        const isDeleted = delete this.changeQue[0][prop];
-        console.log(prop, 'is', isDeleted)
+    completeChange() {
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+        console.log('FINISHED', this.changeQue[0].name);
+        this.changeQue.shift();
+        this.runNextChange();
     }
 
     addChange(change) {
@@ -118,7 +148,8 @@ class Actor {
     }
     runNextChange() {
         if (this.changeQue.length) {
-            console.log('run next', this.changeQue[0]);
+            console.log('**************************');
+            console.log('run next', this.changeQue[0].name);
             this.updateStyles(this.changeQue[0]);
         }
     }
@@ -127,38 +158,5 @@ class Actor {
         return str.replace(/-\w/g, function(m) {
             return m[1].toUpperCase();
         })
-    }
-
-    cleanUpTransition() {
-        const borders = [
-            "border-left",
-            "border-right",
-            "border-bottom",
-            "border-radius"
-        ];
-
-        const removable = ['', 'name', 'transition', ...borders];
-        removable.forEach(item => {
-            delete this.changeQue[0][item];
-
-        });
-        const keys = Object.keys(this.changeQue[0]);
-        keys.forEach( key => {
-            console.log(key, this.changeQue[0], this.changeQue[0][key]);
-            if (
-                (this.changeQue[0][key]) &&
-                ((this.changeQue[0][key].toString().trim() === this.element.style[key].trim())
-                || (this.changeQue[0][key].toString().trim() + 'px' === this.element.style[key].trim()))
-            ) {
-                delete this.changeQue[0][key];
-            } else {
-                console.log('it is not the same', key);
-                console.log( this.changeQue[0][key]);
-                console.log( this.element.style[key]);
-            }
-        });
-
-        console.log(this.changeQue[0], this.element.style)
-
     }
 }
