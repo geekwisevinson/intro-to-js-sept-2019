@@ -42,3 +42,12 @@ shapes.invader = `
       overflow: hidden;
       margin: 50px 0px 70px 65px;
       `;
+
+shapes.mountain = `
+width: 0px;
+height: 0px;
+background-color: rgba(0, 0, 0, 0);
+border-left: 246px solid rgba(0, 0, 0, 0);
+border-right: 246px solid rgba(0, 0, 0, 0);
+border-bottom: 246px solid rgb(0, 0, 0);
+`;
